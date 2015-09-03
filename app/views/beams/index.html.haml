@@ -1,0 +1,11 @@
+= render 'jumbotron'
+
+.container
+  - @beams.each do |beam|
+    = link_to (image_tag beam.image.url(:small)) , beam
+    %h2= link_to beam.title, beam
+    %p
+      = beam.comments.count
+      C omments
+  
+= link_to "Add new Beam", new_beam_path

@@ -1,0 +1,20 @@
+.conatiner
+= image_tag @beam.image.url(:large)
+%h1= @beam.title
+%p= @beam.description
+Submitted by
+%p= @beam.user.name
+
+#comment
+  %h2.comment_count= pluralize(@beam.comments.count, "Comment")
+  - @comments.each do |comment|
+    .comment
+      %p.username= comment.user.name
+      %p.content= comment.content
+      
+  = render 'comments/form'
+  
+  
+= link_to "Edit", edit_beam_path(@beam)
+= link_to "Destroy", beam_path(@beam), method: :delete, data: { confirm: "Are you sure?"}
+= link_to "Home", root_path
