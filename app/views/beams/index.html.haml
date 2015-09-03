@@ -6,6 +6,8 @@
     %h2= link_to beam.title, beam
     %p
       = beam.comments.count
-      C omments
+      Comments
+    %p
+      = beam.get_likes.size
   
 = link_to "Add new Beam", new_beam_path

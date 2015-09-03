@@ -1,5 +1,5 @@
 class BeamsController < ApplicationController
-  before_action :find_beam, only: [:show, :edit, :update, :destroy]
+  before_action :find_beam, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
   before_action :authenticate_user!, except: [:index, :show] 
   def index
     @beams = Beam.all.order("created_at DESC")
@@ -38,6 +38,16 @@ class BeamsController < ApplicationController
   def destroy
     @beam.destroy
     redirect_to root_path
+  end
+  
+  def upvote
+    @beam.upvote_by current_user
+    redirect_to :back
+  end
+  
+  def downvote
+    @beam.downvote_by current_user
+    redirect_to :back
   end
   
   private

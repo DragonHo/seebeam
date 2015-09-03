@@ -1,20 +1,28 @@
 .conatiner
-= image_tag @beam.image.url(:large)
-%h1= @beam.title
-%p= @beam.description
-Submitted by
-%p= @beam.user.name
+  = image_tag @beam.image.url(:large)
+  %h1= @beam.title
+  %p= @beam.description
+  Submitted by
+  %p= @beam.user.name
+  %p
+  = @beam.get_upvotes.size
+  Likes
+  %p
+  = @beam.get_downvotes.size
+  Disklikes
+  = link_to "Like", like_beam_path(@beam), method: :get
+  = link_to "Dislike", dislike_beam_path(@beam), method: :get
 
-#comment
-  %h2.comment_count= pluralize(@beam.comments.count, "Comment")
-  - @comments.each do |comment|
-    .comment
-      %p.username= comment.user.name
-      %p.content= comment.content
+  #comment
+    %h2.comment_count= pluralize(@beam.comments.count, "Comment")
+    - @comments.each do |comment|
+      .comment
+        %p.username= comment.user.name
+        %p.content= comment.content
       
-  = render 'comments/form'
+    = render 'comments/form'
   
   
-= link_to "Edit", edit_beam_path(@beam)
-= link_to "Destroy", beam_path(@beam), method: :delete, data: { confirm: "Are you sure?"}
-= link_to "Home", root_path
+  = link_to "Edit", edit_beam_path(@beam)
+  = link_to "Destroy", beam_path(@beam), method: :delete, data: { confirm: "Are you sure?"}
+  = link_to "Home", root_path
